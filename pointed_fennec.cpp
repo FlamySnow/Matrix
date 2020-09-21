@@ -50,9 +50,9 @@ namespace fennec {
                 return nullptr;
             }
             if (tmp->i >= 1 && tmp->i <= m && tmp->j >= 1 && tmp->j <= n){
-                matrix = insert(matrix, tmp);
+                matrix = insert(matrix, tmp, m);
                 if (!matrix){
-                    erase(matrix, m);
+                    std::cout << "Sorry, memory allocation error: " << std::endl;
                     return nullptr;
                 }
             }
@@ -60,7 +60,7 @@ namespace fennec {
         delete tmp;
         return matrix;
     }
-    Matrix* insert(Matrix* matrix, Data* tmp){
+    Matrix* insert(Matrix* matrix, Data* tmp, int m){
         Line* first = matrix->line[tmp->i - 1];
         if (!first){ //если в строке нет элементов
             try {
@@ -70,7 +70,7 @@ namespace fennec {
                 matrix->line[tmp->i - 1] = first;
             }
             catch(std::bad_alloc &ba){
-                std::cout << "Sorry, memory allocation error: " << ba.what() << std::endl;
+                erase(matrix, m);
                 return nullptr;
             }
             return matrix;
@@ -82,7 +82,7 @@ namespace fennec {
                 matrix->line[tmp->i - 1]->ptr = first;
             }
             catch (std::bad_alloc &ba){
-                std::cout << "Sorry, memory allocation error: " << ba.what() << std::endl;
+                erase(matrix, m);
                 return nullptr;
             }
             return matrix;
@@ -104,7 +104,7 @@ namespace fennec {
                     return matrix;
                 }
                 catch (std::bad_alloc &ba){
-                    std::cout << "Sorry, memory allocation error: " << ba.what() << std::endl;
+                    erase(matrix, m);
                     return nullptr;
                 }
             }
@@ -117,7 +117,7 @@ namespace fennec {
                 first->ptr->ptr = nullptr;
             }
             catch (std::bad_alloc &ba){
-                std::cout << "Sorry, memory allocation error: " << ba.what() << std::endl;
+                erase(matrix, m);
                 return nullptr;
             }
         }
@@ -194,7 +194,7 @@ namespace fennec {
                         tmp->a = ptr->item->a;
                         tmp->i = ptr->item->i;
                         tmp->j = ptr->item->j;
-                        insert(newMatrix, tmp);
+                        insert(newMatrix, tmp, m);
                     }
                     catch (std::bad_alloc &ba){
                         std::cout << "Sorry, memory allocation error: " << ba.what() << std::endl;
@@ -210,7 +210,7 @@ namespace fennec {
                     tmp->a = ptr->item->a;
                     tmp->i = ptr->item->i;
                     tmp->j = ptr->item->j;
-                    insert(newMatrix, tmp);
+                    insert(newMatrix, tmp, m);
                 }
                 catch (std::bad_alloc &ba){
                     std::cout << "Sorry, memory allocation error: " << ba.what() << std::endl;
