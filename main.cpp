@@ -33,5 +33,6 @@ int main () {
     std::cout << "Result matrix:" << std::endl;
     output(res, m);
     erase(arr, m);
+    erase(res, m);
     return 0;
 }
