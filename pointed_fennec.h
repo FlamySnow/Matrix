@@ -25,6 +25,6 @@ namespace fennec{
     int maxItem(Line* row);
     void output (Matrix* matrix, int m);
     Matrix* input (int &m, int &n);
-    Matrix* insert(Matrix* matrix, Data* tmp);
+    Matrix* insert(Matrix* matrix, Data* tmp, int m);
     void erase (Matrix* matrix, int m);
 }
