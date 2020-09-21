@@ -1,12 +1,17 @@
-#include <iostream>
-
 namespace fennec{
-    struct Line{
-        int n;
-        int *a;
+    struct Data{
+        int a;
+        int i;
+        int j;
     };
-
-    template<class Type>
+    struct Line{
+        Data *item; //указатель на элемент
+        Line *ptr; //указатель на следующий элемент
+    };
+    struct Matrix {
+        Line **line;
+    };
+    template <class Type>
     int getNum(Type &a)
     {
         std::cin >> a;
@@ -15,13 +20,11 @@ namespace fennec{
         }
         return 1;
     }
-    inline int isgreater(int a, int b){
-        return a > b;
-    }
-    Line* input (int &rm);
-    void output (const char *msg, Line *a, int m);
-    Line* erase(Line *&matrix, int m);
-    int maxItem(const Line &row);
-    Line* createNewMatrix( Line *&oldMatrix,const int &n);
+    int check(Line* row, int n);
+    Matrix* createNewMatrix(Matrix* matrix, int m, int n);
+    int maxItem(Line* row);
+    void output (Matrix* matrix, int m);
+    Matrix* input (int &m, int &n);
+    Matrix* insert(Matrix* matrix, Data* tmp);
+    void erase (Matrix* matrix, int m);
 }
-
