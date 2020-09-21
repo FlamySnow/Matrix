@@ -9,28 +9,29 @@
 */
 
 #include <iostream>
-#include "pointed_fennec.h"
+#include "tricky_fennec.h"
 
 using namespace fennec;
 
-int main() {
-    Line *arr;
-    Line *res;
-    int m = 0;
-    arr = input(m);
+int main () {
+    Matrix *arr;
+    int m = 0, n = 0;
+    arr = input(m, n);
     if (!arr){
-        std::cout << "incorrect data" << std::endl;
+        std::cout << "Incorrect data." << std::endl;
         return 1;
     }
-    res = createNewMatrix(arr, m);
+    std::cout << "Sourced matrix:" << std::endl;
+    output(arr, m);
+    Matrix *res;
+    res = createNewMatrix(arr, m, n);
     if (!res){
-        std::cout << "Error in allocate memory" << std::endl;
+        std::cout << "Incorrect data." << std::endl;
         erase(arr, m);
         return 1;
     }
-    output("Sourced matrix", arr, m);
-    output("Resulted matrix", res, m);
+    std::cout << "Result matrix:" << std::endl;
+    output(res, m);
     erase(arr, m);
-    erase(res, m);
     return 0;
 }
